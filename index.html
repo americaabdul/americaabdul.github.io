@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Shining SVG</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+        }
+        img {
+            width: 300px;
+            filter: drop-shadow(0 0 10px white);
+            transition: filter 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img id="signature" src="signature.svg" alt="Signature">
+</div>
+
+<script>
+    const signature = document.getElementById("signature");
+    document.addEventListener("mousemove", (event) => {
+        const { clientX, clientY } = event;
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        const deltaX = clientX - centerX;
+        const deltaY = clientY - centerY;
+
+        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+        signature.style.transform = `rotate(${angle}deg)`;
+        signature.style.filter = `drop-shadow(0 0 20px white)`;
+    });
+</script>
+</body>
+</html>
